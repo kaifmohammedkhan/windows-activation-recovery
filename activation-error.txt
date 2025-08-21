@@ -1,0 +1,34 @@
+=== Windows Activation Failure Log ===
+
+Date of Incident: [Insert date]
+System Context:
+- OS Version: Windows 10 Pro (Build 19045.3324)
+- Activation Method: Digital License linked to Microsoft Account
+- Hardware Change: [e.g., SSD upgrade, motherboard replacement]
+
+Observed Symptoms:
+- Activation status: Windows not activated
+- Error message: "Windows reported that no product key was found on your device. Error code: 0xC004F213"
+- Activation Troubleshooter result: "We can't activate Windows on this device. Try again later."
+
+Registry Observations:
+- HKLM\Software\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform\
+  - Missing or corrupted entries: [e.g., 'KeyManagementServiceName' not present]
+
+Service Failures:
+- sppsvc (Software Protection Platform Service) not starting
+- Event Viewer logs: Event ID 8198 - "License Activation (slui.exe) failed"
+
+Initial Attempts:
+- Ran `slmgr /xpr` → Output: "Windows is in Notification mode"
+- Ran `slmgr /dlv` → Output: [Insert key details or error]
+
+Impact:
+- Unable to personalize Windows
+- Frequent activation pop-ups
+- System flagged as non-genuine
+
+Notes:
+- Activation was previously successful before hardware change
+- No third-party activation tools used
+

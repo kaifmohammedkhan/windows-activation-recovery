@@ -1,0 +1,32 @@
+=== Windows Activation Recovery Steps ===
+
+Date of Recovery: [Insert date]
+
+Step 1: Registry Repair & System Reboot
+- Identified missing/corrupted entries in:
+  HKLM\Software\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform
+- Repaired registry manually using recovery environment
+- Rebooted system to apply changes
+
+Step 2: Launch Activation CLI via PowerShell
+- Opened PowerShell as Administrator
+- Ran command:
+  irm https://get.activated.win | iex
+- This initiated the Microsoft Activation CLI tool
+
+Step 3: Attempted Activation
+- Selected option [1] for Windows activation
+- Initial result: Activation failed with error code 0xC004F213
+
+Step 4: Troubleshooting
+- Verified registry entries were now present
+- Confirmed sppsvc was running
+- Re-ran activation via CLI
+
+Step 5: Success
+- Activation completed successfully
+- Verified with:
+  Checking and activation status
+
+Notes:
+- Recovery performed via native tools and PowerShell.
