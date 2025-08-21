@@ -37,6 +37,27 @@ This recovery flow documents how I diagnosed and resolved a deep Windows activat
 - Executed custom `rearm.cmd` script to reset licensing state
 - Rebooted to apply registry changes
 
+🧱 Fixing WPA Registry (Kernel-Protected Key)
+
+To repair the corrupted HKEYLOCALMACHINE\SYSTEM\WPA registry key — which was blocking sppsvc and activation — I followed the Gravesoft method:
+
+1. Downloaded rearm.cmd
+2. Placed it in C:\rearm.cmd
+3. Rebooted into Windows Recovery using:
+   `cmd
+   shutdown /f /r /o /t 0
+   `
+4. Opened Command Prompt via Troubleshoot > Advanced Options
+5. Ran:
+   `cmd
+   C:\rearm.cmd
+   `
+   (or used bcdedit | find "osdevice" to locate the correct drive letter)
+
+This cleared the kernel-protected WPA key and allowed sppsvc to start successfully.
+
+🔗 Gravesoft Guide: Fix WPA Registry
+
 ### 💻 2. Launch Activation CLI via PowerShell
 - Opened PowerShell as Administrator
 - Ran:
