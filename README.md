@@ -7,6 +7,8 @@ After a motherboard swap, my Windows 10 system failed to activate due to missing
 
 ## ⚠️ Problem Statement
 
+> ⚠️ Initial diagnosis revealed a malware-induced deletion of `sppsvc.exe`, the core Software Protection service. Activation tools failed, and registry corruption was evident. This case study documents the full recovery journey — from malware detection to permanent activation.
+
 - Windows edition mismatch (Enterprise → Pro)
 - `sppsvc` (Software Protection Platform) service missing or broken
 - Activation errors due to corrupted `WPA` registry keys
@@ -27,46 +29,69 @@ After a motherboard swap, my Windows 10 system failed to activate due to missing
 
 ## 🧪 Solution Steps
 
-### 1. Prepare Recovery Script
-- Downloaded [`rearm.cmd`](https://github.com/asdcorp/rearm) from GitHub
-- Placed script at `C:\rearm.cmd`
+This recovery flow documents how I diagnosed and resolved a deep Windows activation failure after hardware changes, using registry repair and CLI-based activation.
 
-### 2. Boot into Windows Recovery
-- Selected: Troubleshoot → Advanced Options → Command Prompt
+### 🔧 1. Registry Repair via Recovery Environment
+- Detected corruption in `HKLM\SYSTEM\WPA` registry hive
+- Booted into Windows Recovery Command Prompt
+- Executed custom `rearm.cmd` script to reset licensing state
+- Rebooted to apply registry changes
 
-### 3. 3. Execute Registry Repair
+### 💻 2. Launch Activation CLI via PowerShell
+- Opened PowerShell as Administrator
+- Ran:
+  powershell
   
-   C:\rearm.cmd
+  irm https://get.activated.win | iex
+  
+- This launched the Microsoft Activation CLI tool
 
-- If not recognized:
-   
-   bcdedit | find "osdevice"
-E:\rearm.cmd  # Replace with actual OS volume
+### 🧩 3. Attempted Activation
+- Selected option [1] for Windows activation
+- Initial result: Activation failed with error `0xC004F213` (no product key found)
 
-### 4. Reboot and Verify
+### 🧠 4. Troubleshooting
+- Verified restored registry entries and licensing services
+- Confirmed `sppsvc` was running
+- Re-ran activation via CLI
 
-sppsvc restored
+### ✅ 5. Success
+- Activation completed successfully
+- Verified with:
+  ```powershell
+  slmgr /xpr
+  slmgr /dlv
+  ```
+- Status: Windows 10 Pro activated with digital license linked to Microsoft account
 
-Windows activated with digital license linked to Microsoft account
+---
 
-✅ Outcome:
-Windows 10 Pro activated without reinstall
+## 📘 Key Learnings
+- Recovery from kernel-level licensing failures is possible without reinstalling Windows
+- CLI tools like `slmgr` and custom scripts can bypass GUI limitations
+- Documenting each step builds credibility and helps others facing similar issues
 
-sppsvc service fully functional
+-----
 
-Registry corruption resolved
+## 📂 Repo Contents
 
-🧠 Lessons Learned:
-Kernel-protected registry keys require recovery environment access
+| File              | Description |
+|-------------------|-------------|
+| `README.md`       | Full case study and solution steps |
+| `activation-error.txt` | Raw error logs from failed activation attempts |
+| `recovery-steps.txt`   | Step-by-step manual recovery flow |
+| `timeline.md`     | Chronological breakdown of troubleshooting |
+| `.gitignore`      | Git tracking exclusions |
+| `LICENSE`         | Repository license |
 
-bcdedit is a powerful tool for dynamic volume detection
+---
 
-GitHub scripts like rearm.cmd can be life-saving
+## 🧠 Case Study Summary
 
-📸 Screenshots:
-See /screenshots for activation success and recovery command prompt.
+After a hardware change triggered a Windows activation failure (`0xC004F213`), I diagnosed and repaired kernel-level registry corruption without reinstalling the OS. This repo documents the full recovery flow, including CLI activation, service validation, and registry restoration.
 
-Strategic troubleshooting beats brute-force reinstallations
+Why it matters: 
+- Demonstrates deep troubleshooting under pressure  
+- Highlights DevOps mindset: automation, documentation, and resilience  
+- Turns adversity into a technical branding asset
 
-System stability restored```bash
-##shutdown /f /r /o /t 0
