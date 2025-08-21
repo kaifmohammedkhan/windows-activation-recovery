@@ -1,0 +1,40 @@
+# Windows system files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Recycle Bin
+$RECYCLE.BIN/
+
+# System Volume Information
+System Volume Information/
+
+# Windows activation logs (optional)
+*.bak
+*.log
+*.tmp
+
+# GitHub artifacts
+.DS_Store
+*.swp
+*.swo
+
+# VS Code settings (if used)
+.vscode/
+
+# Python cache (if you use scripts)
+__pycache__/
+*.pyc
+
+# PowerShell history
+PSReadLineHistory.txt
+
+# ISO and WIM files
+*.iso
+*.wim
+*.esd
+
+# rearm script artifacts
+rearm.cmd
+*.bat
+*.cmd
