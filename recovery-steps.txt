@@ -2,31 +2,47 @@
 
 Date of Recovery: [Insert date]
 
-Step 1: Registry Repair & System Reboot
-- Identified missing/corrupted entries in:
-  HKLM\Software\Microsoft\Windows NT\CurrentVersion\SoftwareProtectionPlatform
-- Repaired registry manually using recovery environment
-- Rebooted system to apply changes
+Step 1: Diagnose Activation Failure
+- Error code: 0xC004F213 ("No product key found")
+- Services failed: sppsvc, SoftwareLicensingService
+- Registry corruption detected in HKLM\SYSTEM\WPA
+- Activation CLI failed to validate license
 
-Step 2: Launch Activation CLI via PowerShell
+Step 2: Fix WPA Registry via Gravesoft Method
+- Downloaded rearm.cmd from Gravesoft:
+  https://github.com/asdcorp/rearm/archive/refs/heads/principalis.zip
+- Saved to: C:\rearm.cmd
+- Rebooted into Windows Recovery using:
+  shutdown /f /r /o /t 0
+- Opened Command Prompt via Troubleshoot > Advanced Options
+- Ran:
+  C:\rearm.cmd
+  (Used bcdedit | find "osdevice" to confirm drive letter if needed)
+- Result: Kernel-protected WPA key reset successfully
+
+Step 3: Reboot & Validate Services
+- Rebooted system
+- Verified sppsvc and SoftwareLicensingService were running
+- Registry entries restored under SoftwareProtectionPlatform
+
+Step 4: Launch Activation CLI via PowerShell
 - Opened PowerShell as Administrator
-- Ran command:
+- Ran:
   irm https://get.activated.win | iex
-- This initiated the Microsoft Activation CLI tool
-
-Step 3: Attempted Activation
 - Selected option [1] for Windows activation
-- Initial result: Activation failed with error code 0xC004F213
+- Initial result: Activation failed (0xC004F213)
 
-Step 4: Troubleshooting
-- Verified registry entries were now present
-- Confirmed sppsvc was running
-- Re-ran activation via CLI
+Step 5: Retry Activation After Registry Fix
+- Re-ran CLI activation
+- Result: Activation successful
 
-Step 5: Success
-- Activation completed successfully
-- Verified with:
-  Checking and activation status
+Step 6: Confirm Activation Status
+- Ran:
+  slmgr /xpr → Output: "Windows is permanently activated"
+  slmgr /dlv → Output: License details confirmed
+- Status: Windows 10 Pro activated with digital license linked to Microsoft account
 
 Notes:
-- Recovery performed via native tools and PowerShell.
+- No third-party activation tools used
+- Recovery performed entirely via native tools, PowerShell, and Gravesoft method
+- No data loss or OS reinstall required
