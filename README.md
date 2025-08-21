@@ -68,4 +68,28 @@ This recovery flow documents how I diagnosed and resolved a deep Windows activat
 - Recovery from kernel-level licensing failures is possible without reinstalling Windows
 - CLI tools like `slmgr` and custom scripts can bypass GUI limitations
 - Documenting each step builds credibility and helps others facing similar issues
-```
+
+-----
+
+## 📂 Repo Contents
+
+| File              | Description |
+|-------------------|-------------|
+| `README.md`       | Full case study and solution steps |
+| `activation-error.txt` | Raw error logs from failed activation attempts |
+| `recovery-steps.txt`   | Step-by-step manual recovery flow |
+| `timeline.md`     | Chronological breakdown of troubleshooting |
+| `.gitignore`      | Git tracking exclusions |
+| `LICENSE`         | Repository license |
+
+---
+
+## 🧠 Case Study Summary
+
+After a hardware change triggered a Windows activation failure (`0xC004F213`), I diagnosed and repaired kernel-level registry corruption without reinstalling the OS. This repo documents the full recovery flow, including CLI activation, service validation, and registry restoration.
+
+Why it matters: 
+- Demonstrates deep troubleshooting under pressure  
+- Highlights DevOps mindset: automation, documentation, and resilience  
+- Turns adversity into a technical branding asset
+
