@@ -57,10 +57,7 @@ This recovery flow documents how I diagnosed and resolved a deep Windows activat
 
 ### ✅ 5. Success
 - Activation completed successfully
-- Verified with:
-  ```powershell
-  slmgr /xpr
-  slmgr /dlv
+- Verified with: Windows Activation on settings and on CMD Cli
   ```
 - Status: Windows 10 Pro activated with digital license linked to Microsoft account
 
