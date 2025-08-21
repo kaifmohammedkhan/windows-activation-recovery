@@ -69,10 +69,10 @@ This cleared the kernel-protected WPA key and allowed sppsvc to start successful
 
 ### 🧩 3. Attempted Activation
 - Selected option [1] for Windows activation
-- Initial result: Activation failed with error `0xC004F213` (no product key found)
+- Initial result before Gravesoft method: Activation failed with error `0xC004F213` (no product key found)
 
 ### 🧠 4. Troubleshooting
-- Verified restored registry entries and licensing services
+- Verified restored registry entries and licensing services [Followed Step 1]
 - Confirmed `sppsvc` was running
 - Re-ran activation via CLI
 
