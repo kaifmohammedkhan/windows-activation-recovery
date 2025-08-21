@@ -7,6 +7,8 @@ After a motherboard swap, my Windows 10 system failed to activate due to missing
 
 ## ⚠️ Problem Statement
 
+> ⚠️ Initial diagnosis revealed a malware-induced deletion of `sppsvc.exe`, the core Software Protection service. Activation tools failed, and registry corruption was evident. This case study documents the full recovery journey — from malware detection to permanent activation.
+
 - Windows edition mismatch (Enterprise → Pro)
 - `sppsvc` (Software Protection Platform) service missing or broken
 - Activation errors due to corrupted `WPA` registry keys
