@@ -1,6 +1,6 @@
 === Windows Activation Recovery Steps ===
 
-Date of Recovery: [Insert date]
+Date of Recovery: [21st August 2025]
 
 Step 1: Diagnose Activation Failure
 - Error code: 0xC004F213 ("No product key found")
